@@ -14,6 +14,13 @@ app.set('views', path.join(__dirname, 'views'));
 // app.engine('.hbs', exphbs.engine({defaultLayout: 'main'}));
 app.engine('handlebars', engine({ extname: '.hbs', defaultLayout: "main"}));
 app.set('view engine', 'handlebars');
+app.set("views", "./views");
+
+app.get('/', (req, res) => {
+    res.render('home');
+});
+
+app.listen(3000);
 app.set('port', config.port);
 
 app.use('/', express.static('public'))
