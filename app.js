@@ -1,26 +1,25 @@
+import express from 'express';
+import { engine } from 'express-handlebars';
+
+const app = express();
+
+app.engine('.hbs', engine({extname: '.hbs'}));
+app.set('view engine', '.hbs');
+app.set('views', './views');
+
 const config = require('./config');
 const express = require('express');
 const path = require('path');
 // const exphbs = require('express-handlebars');
-const { engine } = require('express-handlebars');
+//const { engine } = require('express-handlebars');
 
 const index = require('./routes/index');
 const who = require('./routes/who');
 const contact = require('./routes/contact');
 
-const app = express();
-
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 // app.engine('.hbs', exphbs.engine({defaultLayout: 'main'}));
-app.engine('handlebars', engine({ extname: '.hbs', defaultLayout: "main"}));
-app.set('view engine', 'handlebars');
-app.set("views", "./views");
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
-app.listen(3000);
 app.set('port', config.port);
 
 app.use('/', express.static('public'))
